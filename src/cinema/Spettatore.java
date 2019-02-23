@@ -57,7 +57,7 @@ public class Spettatore {// inizio classe spettatore
 	}// fine setter biglietto
 
 	public int getEta() {//inizio getter età
-		Period differenza = Period.between(LocalDate.now(), this.dataNascita);//Compara le 2 date
+		Period differenza = Period.between(this.dataNascita, LocalDate.now());//Compara le 2 date
 		return differenza.getYears();// fa ritornare gli anni di differenza
 	}// fine metodo per ottenere età
 
