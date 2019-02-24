@@ -1,33 +1,29 @@
 package cinema;
 
 public enum Generi  
-{
-		ANIMAZIONE(0),
-		AVVENTURA(1),
-		BIOGRAFICO(2),
-		COMMEDIA(3),
-		DOCUMENTARIO(4),
-		DRAMMATICO(5),
-		EROTICO(6),
-		FANTASCIENZA(7),
-		FANTASY(8),
-		GUERRA(9),
-		HORROR(10),
-		MUSICAL(11),
-		STORICO(12),
-		THRILLER(13),
-		WESTERN(14);
+{	
+		ANIMAZIONE,
+		AVVENTURA,
+		BIOGRAFICO,
+		COMMEDIA,
+		DOCUMENTARIO,
+		DRAMMATICO,
+		EROTICO,
+		FANTASCIENZA,
+		FANTASY,
+		GUERRA,
+		HORROR,
+		MUSICAL,
+		STORICO,
+		THRILLER,
+		WESTERN;
 	
-	private int index;
-	
-	Generi(int n)
+	public static void stampaGeneri()
 	{
-		index = n;
-	}
-	
-	public int getIndex()
-	{
-		return index;
+		for(int i = 0; i < Generi.values().length; i++)
+		{
+			System.out.println(i+") " + Generi.values()[i]);
+		}
 	}
 	
 }
