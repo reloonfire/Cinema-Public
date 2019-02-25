@@ -9,7 +9,7 @@ public class SalaCinematografica {
 	private int index = 0; // serve per inserire uno spettatore nella sala in un posto libero
 
 	public SalaCinematografica(String nome, int nPosti) {
-		spettatori = new Spettatore[nPosti]; // array che conterrà il numero di posti totali
+		spettatori = new Spettatore[nPosti]; // array che conterrÃ  il numero di posti totali
 		this.nome = nome;
 	}
 
@@ -20,18 +20,21 @@ public class SalaCinematografica {
 		index = 0;
 	}
 
-	public void consentiIngresso(Spettatore spettatore) throws Exception { // controlla se uno spettatore può accedere
-		if (index < spettatori.length) {
-			if (spettatore.getEta() <= 14 && filmProiettato.getGenere().equals(Generi.HORROR)) { 
-				throw new Exception("Film Vietato"); // viene lanciata l' eccezione  se lo spettatore ha 14 anni o meno
+	public void consentiIngresso(Spettatore spettatore) throws Exception { // controlla se uno spettatore puÃ² accedere
+		if(filmProiettato != null) {
+			if (index < spettatori.length) {
+				if (spettatore.getEta() <= 14 && filmProiettato.getGenere().equals(Generi.HORROR)) { 
+					throw new Exception("Film Vietato"); // viene lanciata l' eccezione  se lo spettatore ha 14 anni o meno
+				} else {
+					spettatori[index] = spettatore;
+					index++;
+				}
 			} else {
-				spettatori[index] = spettatore;
-				index++;
+				throw new Exception("SalaAlCompleto"); //viene lanciata l' eccezione ala al completo
 			}
 		} else {
-			throw new Exception("SalaAlCompleto"); //viene lanciata l' eccezione ala al completo
+			throw new Exception("FilmNonDisponibile");
 		}
-
 	}
 
 	public float calcolaIncasso() {  // calcola l'incasso di una singola sala
@@ -55,5 +58,9 @@ public class SalaCinematografica {
 
 	public void setFilm(Film film) {
 		filmProiettato = film;
+	}
+	
+	public float getIncasso() {
+		return incasso;
 	}
 }
