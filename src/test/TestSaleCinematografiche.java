@@ -12,7 +12,7 @@ import cinema.Generi;
 public class TestSaleCinematografiche {
 
 	public static SalaCinematografica c = new SalaCinematografica("SalaTest", 100);
-	public static Spettatore sp = new Spettatore (33, "Test", "Cognome", LocalDate.of(1998, 4, 28),new Biglietto(2,5) );
+	public static Spettatore sp = new Spettatore ("Test", "Cognome", LocalDate.of(1998, 4, 28),new Biglietto(2,5) );
     public static Film f = new Film("Titolo", "Autore", "Produttore",Generi.DRAMMATICO, 120);
 	public static void main(String[] args) {
 		c.setFilm(f);
