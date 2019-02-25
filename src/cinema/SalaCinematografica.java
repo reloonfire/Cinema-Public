@@ -63,4 +63,10 @@ public class SalaCinematografica {
 	public float getIncasso() {
 		return incasso;
 	}
+
+	public Film getFilmProiettato() {
+		return filmProiettato;
+	}
+	
+	
 }
