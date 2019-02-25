@@ -36,5 +36,9 @@ public class Film {
 		return durata;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Film [titolo=" + titolo + ", autore=" + autore + ", produttore=" + produttore + ", genere=" + genere
+				+ ", durata=" + durata + "]";
+	}
 }

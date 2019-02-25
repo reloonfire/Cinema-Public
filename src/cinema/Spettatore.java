@@ -5,28 +5,24 @@ import java.time.Period;//pacchetto per comparare le date
 
 public class Spettatore {// inizio classe spettatore
 
-	private static int idSpettatore;// attributi della classe
+	private int idSpettatore = 0;// attributi della classe
 	private String nome;
 	private String cognome;
 	private LocalDate dataNascita;
 	private Biglietto biglietto;
 
-	public Spettatore(int idSpettatore, String nome, String cognome, LocalDate dataNascita, Biglietto biglietto) {// inizio
+	public Spettatore(String nome, String cognome, LocalDate dataNascita, Biglietto biglietto) {// inizio
 																													// costruttore
-		this.idSpettatore = idSpettatore;// valori attribuiti agli attributi della classe
+		this.idSpettatore++;// valori attribuiti agli attributi della classe
 		this.nome = nome;
 		this.cognome = cognome;
 		this.dataNascita = dataNascita;
 		this.biglietto = biglietto;
 	}
 
-	public static int getIdSpettatore() {// inizio getter idSpettatore
+	public int getIdSpettatore() {// inizio getter idSpettatore
 		return idSpettatore;
 	}// fine getter idSpettatore
-
-	public static void setIdSpettatore(int idSpettatore) {// inizio setter idSpettatore
-		Spettatore.idSpettatore = idSpettatore;
-	}// fine setter idSpettatore
 
 	public String getNome() {// inizio getter nome
 		return nome;
@@ -61,7 +57,7 @@ public class Spettatore {// inizio classe spettatore
 	}// fine setter biglietto
 
 	public int getEta() {//inizio getter età
-		Period differenza = Period.between(LocalDate.now(), this.dataNascita);//Compara le 2 date
+		Period differenza = Period.between(this.dataNascita, LocalDate.now());//Compara le 2 date
 		return differenza.getYears();// fa ritornare gli anni di differenza
 	}// fine metodo per ottenere età
 
