@@ -30,6 +30,11 @@ public class Biglietto {
 
 	public float getPrezzo() {
 		return prezzo;
+		
+	}
+	@Override
+	public String toString() {
+		return "Biglietto [posizione=" + posizione + ", prezzo=" + prezzo + "]";
 	}
 
 }
