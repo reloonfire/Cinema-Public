@@ -5,7 +5,7 @@ import cinema.Film;
 import cinema.Generi;
 import cinema.SalaCinematografica;
 
-public class CinemaTest 
+public class TestCinema 
 {
 	private static SalaCinematografica sala = new SalaCinematografica("Sala 15", 50);
 	private static Cinema cinema =  new Cinema(1);
