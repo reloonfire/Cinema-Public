@@ -19,12 +19,32 @@ public class Statistiche
 		spettatoriGeneriOggi[film.getGenere().ordinal()] += nSpettatori;
 		for(int i = 0; i < filmCinema.length; i++)
 		{
-			if(filmCinema[i].equals(film))
+			if(filmCinema[i] != null)
 			{
-				spettatoriPerFilm[i] += nSpettatori;
+				if(filmCinema[i].equals(film))
+				{
+					spettatoriPerFilm[i] += nSpettatori;
+				}
 			}
+			
 		}
 	}
+	
+//	public String calcolaStatsGeneri(Generi genere)                        //metodo per il calcolo della percentuale di incremento/decremento
+//	{
+//		if(spettatoriGeneriIeri[genere.ordinal()] == 0)
+//		{
+//			return "Non puoi calcolare le statistiche di questo genere perché ieri nessuno ha visto film di questo genere";
+//		}
+//		
+//		double differenzaSpettOggiIeri = spettatoriGeneriOggi[genere.ordinal()] - spettatoriGeneriIeri[genere.ordinal()];
+//		double percentuale = 100 * differenzaSpettOggiIeri / spettatoriGeneriIeri[genere.ordinal()];
+//		
+//		return (spettatoriGeneriOggi[genere.ordinal()] < spettatoriGeneriIeri[genere.ordinal()]
+//				? "Il genere " + genere + " da ieri a oggi ha avuto un decremento del " + String.format("%.2f", percentuale*-1) + "%"
+//				: "Il genere " + genere + " da ieri a oggi ha avuto un incremento del " + String.format("%.2f", percentuale) + "%");
+//				
+//	}
 	
 	public void daOggiAIeri()											   //metodo da eseguire a fine giornata per copiare l'array spettatoriGeneriOggi in spettatoriGeneriIeri per poi azzerarlo
 	{
@@ -44,7 +64,7 @@ public class Statistiche
 			}
 		}
 		
-		return "Il film che ha avuto il maggior numero di spettatori oggi è stato " + filmCinema[indice].getTitolo() + " con " + spettatoriPerFilm[indice] + " spettatori";
+		return "Il film che ha avuto il maggior numero di spettatori oggi è stato " + filmCinema[indice] + " con " + spettatoriPerFilm[indice] + " spettatori";
 	}
 	
 	public String calcolaMinSpettatoriFilm() 							  //metodo per individuare il film con meno spettatori
@@ -58,7 +78,7 @@ public class Statistiche
 			}
 		}
 	 
-		return "Il film che ha avuto il minor numero di spettatori oggi è stato " + filmCinema[indice].getTitolo() + " con " + spettatoriPerFilm[indice] + " spettatori";
+		return "Il film che ha avuto il minor numero di spettatori oggi è stato " + filmCinema[indice] + " con " + spettatoriPerFilm[indice] + " spettatori";
 	}
 
 	
