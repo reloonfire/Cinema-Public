@@ -1,5 +1,8 @@
 package avvio;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -115,14 +118,14 @@ public class MainClass
 				nomeSala = sc.nextLine();
 			}
 			
-			while(nPostiSala <= 0)							//continuo fino a che la sala non contiene più di 0 posti
+			while(nPostiSala <= 0)							//continuo fino a che la sala non contiene piÃ¹ di 0 posti
 			{
 				System.out.println("Inserisci il numero di posti che la sala contiene");
 				try
 				{
 					nPostiSala = Integer.parseInt(sc.nextLine().replaceAll("\\D+", ""));	//rimuovo tutti i caratteri dalla input dell'utente che non siano numeri e poi faccio il cast a Integer
 				}
-				catch(NumberFormatException e)	//se l'utente ha inserito valori errati il valore passato al casting sarà vuoto e lancerà un'eccezione, qui la gestisco con un syso e reimposto la variabile nPostiSala a 0 per evitare problemi
+				catch(NumberFormatException e)	//se l'utente ha inserito valori errati il valore passato al casting sarÃ  vuoto e lancerÃ  un'eccezione, qui la gestisco con un syso e reimposto la variabile nPostiSala a 0 per evitare problemi
 				{
 					System.out.println("Devi inserire dei numeri!!");
 					nPostiSala = 0;
@@ -134,10 +137,29 @@ public class MainClass
 			nomeSala = "";
 			nPostiSala = 0;
 		}
+		autoGenerateFilm();
 		creaFilm();				//obbligo a creare film
 		assegnaFilmSala();		//obbligo almeno alla prima volta ad assegnare dei film alle sale
 	}
 
+	private static void autoGenerateFilm() {
+		Scanner in = null;
+		try {
+			in = new Scanner(new File("src/cinema/ListaFilm.txt"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		while(in.hasNextLine()) {
+			String line = in.nextLine();
+			String[] args = line.split("\\|");
+			if (line.charAt(0) == '#')
+				continue; //E' un commento, salta.
+			cinema.caricaFilm(new Film(args[0], args[1], args[2], Generi.values()[Integer.parseInt(args[3])-1], Integer.parseInt(args[4])));
+		}
+		
+	}
+	
 	private static void creaFilm()   					//creo i film che verranno aggiunti all'array films di Cinema
 	{
 		Film film = null;
@@ -155,7 +177,7 @@ public class MainClass
 			produttore = sc.nextLine();
 		}
 		
-		while(durata <= 0)	//richiedo la durata fino a che non è maggiore di 0
+		while(durata <= 0)	//richiedo la durata fino a che non Ã¨ maggiore di 0
 		{
 			System.out.println("Inserisci la durata in minuti");
 			try
@@ -169,7 +191,7 @@ public class MainClass
 			}
 		}
 		
-		while(genere == null)	//richiedo il genere fino a che non è diverso da null
+		while(genere == null)	//richiedo il genere fino a che non Ã¨ diverso da null
 		{
 			Generi.stampaGeneri();	//stampo tutti i generi con indice per l'utente
 			System.out.println("\nInserisci il numero relativo al genere da selezionare");
@@ -259,7 +281,7 @@ public class MainClass
 		while(!scelta.equalsIgnoreCase("9"))
 		{
 			System.out.println(
-							   "0) Per visualizzare il film con più spettatori\n"
+							   "0) Per visualizzare il film con piÃ¹ spettatori\n"
 							 + "1) Per visualizzare il film con meno spettatori\n"
 							 + "2) Per visualizzare le statistiche di un genere specifico\n"
 							 + "3) Per visualizzare l'incasso del cinema"
@@ -274,7 +296,7 @@ public class MainClass
 						  	break;
 				
 				case "2": 	Generi genere = null;
-							while(genere == null)	//richiedo il genere fino a che non è diverso da null
+							while(genere == null)	//richiedo il genere fino a che non Ã¨ diverso da null
 							{
 								Generi.stampaGeneri();	//stampo tutti i generi con indice per l'utente
 								System.out.println("\nInserisci il numero relativo al genere da selezionare");
@@ -293,7 +315,7 @@ public class MainClass
 							}
 							System.out.println(cinema.getStatistiche().calcolaStatsGeneri());	//abilitare insieme al metodo in statistiche riga 29
 							break;
-				case "3":	System.out.println("L'incasso del cinema è: " + cinema.getIncasso() + "");
+				case "3":	System.out.println("L'incasso del cinema Ã¨: " + cinema.getIncasso() + "Â€");
 				case "9":	
 						  break;
 			}
@@ -314,7 +336,7 @@ public class MainClass
 				System.out.println(i+") " + saleCinema[i]);
 			}
 			
-			System.out.println("Scegli la sala tra quelle sopra inserendo il numero corrispondente, se si va oltre si richiederà l'inserimento");
+			System.out.println("Scegli la sala tra quelle sopra inserendo il numero corrispondente, se si va oltre si richiederÃ  l'inserimento");
 			
 			try
 			{
@@ -345,23 +367,23 @@ public class MainClass
 			{
 				case "0": try
 						  {
-							  sala.consentiIngresso(creaSpettatore(sala));	//creo spettatore e controllo se può essere inserito nella sala
+							  sala.consentiIngresso(creaSpettatore(sala));	//creo spettatore e controllo se puÃ² essere inserito nella sala
 						  }
 						  catch(Exception e)
 						  {
-							  System.out.println("Lo spettatore non può essere inserito perché: " + e); //faccio così perché viene lanciata solo una exception generica, così posso visualizzare il messaggio relativo all'exception
+							  System.out.println("Lo spettatore non puÃ² essere inserito perchÃ©: " + e); //faccio cosÃ¬ perchÃ© viene lanciata solo una exception generica, cosÃ¬ posso visualizzare il messaggio relativo all'exception
 						  }
 //				case "0": try
 //						  {
 //								if(sala.possoEntrare())					//controllo che vi sia posto
 //								{
-//									sala.consentiIngresso(creaSpettatore(sala));	//creo spettatore e controllo se può essere inserito nella sala
+//									sala.consentiIngresso(creaSpettatore(sala));	//creo spettatore e controllo se puÃ² essere inserito nella sala
 //								}
 //				  
 //						  }
 //						  catch(Exception e)
 //						  {
-//							  System.out.println("Lo spettatore non può essere inserito perché: " + e); //faccio così perché viene lanciata solo una exception generica, così posso visualizzare il messaggio relativo all'exception
+//							  System.out.println("Lo spettatore non puÃ² essere inserito perchÃ©: " + e); //faccio cosÃ¬ perchÃ© viene lanciata solo una exception generica, cosÃ¬ posso visualizzare il messaggio relativo all'exception
 //						  }
 						  break;
 						
@@ -388,7 +410,7 @@ public class MainClass
 		Spettatore sp = null;
 		String nome = "",
 			   cognome = "";
-		int idSpettatore = (int) (Math.random()*89999999 + 10000000);		//assolutamente da modificare perché deve essere univoco e contenuto nel cinema
+		int idSpettatore = (int) (Math.random()*89999999 + 10000000);		//assolutamente da modificare perchÃ© deve essere univoco e contenuto nel cinema
 		LocalDate dataNascita = null;
 		int anno = 0;
 		int mese = 0;
@@ -542,7 +564,7 @@ public class MainClass
 				posizione = Integer.parseInt(sc.nextLine().replaceAll("\\D+", ""));
 				if(sala.getSpettatori()[posizione] != null)							//prima di questo stampare array spettatori
 				{
-					System.out.println("Questa posizione è già occupata");
+					System.out.println("Questa posizione Ã¨ giÃ  occupata");
 					posizione = -1;
 				}
 			}
