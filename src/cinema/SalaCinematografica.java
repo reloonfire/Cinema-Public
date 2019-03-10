@@ -68,5 +68,8 @@ public class SalaCinematografica {
 		return filmProiettato;
 	}
 	
+	public int getNumeroSpettatori() {
+		return index;
+	}
 	
 }
