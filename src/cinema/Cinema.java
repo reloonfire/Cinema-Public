@@ -21,7 +21,7 @@ public class Cinema {
 		}																							//fine IF
 		else {																						//inizio ELSE
 			films[indexFilm++] = film;																//incrementa index e aggiunge film nell'array di film
-			System.out.println("Film aggiunto!");													//stampa
+			//System.out.println("Film aggiunto!");													//stampa
 		}																							//fine IF
 	}																								//fine metodo
 	
@@ -43,7 +43,7 @@ public class Cinema {
 			incasso += sale[i].calcolaIncasso();													//somma gli incassi delle sale cinematografiche ( 5 nel nostro caso )
 		}																							//fine FOR
 		
-		System.out.println("Ecco il tuo incasso totale del cinema: " + incasso);					//visualizzazione incasso totale
+		System.out.println("Ecco il tuo incasso totale del cinema: " + incasso + "€");					//visualizzazione incasso totale
 	}																								//fine metodo
 	
 	
